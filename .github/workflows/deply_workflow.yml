@@ -8,7 +8,7 @@ jobs:
   name: Deploy
   runs-on: ubuntu-latest
   steps:
-  - name: testing server ssh connection
+  - name: deploy to server
     uses: appleboy/ssh-action@master
     with:
      host: ssh.barutec.com 
@@ -20,7 +20,6 @@ jobs:
       git pull
       npm -v
       node -v
-      npm ci
-      npm run build
-      pm2 reload strapi-sao || pm2 start npm --name strapi-sao -- run start
+      npm i
+      pm2 reload strapi-sao || pm2 start npm --name strapi-sao -- run develop
 
