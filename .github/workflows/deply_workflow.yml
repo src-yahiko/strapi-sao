@@ -1,0 +1,26 @@
+name: Deployment Workflow
+on:
+ push:
+  branches: [ main ]
+
+jobs:
+ job_one:
+  name: Deploy
+  runs-on: ubuntu-latest
+  steps:
+  - name: testing server ssh connection
+    uses: appleboy/ssh-action@master
+    with:
+     host: ssh.barutec.com 
+     username: root
+     key: ${{ secrets.id_rsa_barutec }}
+     port: 22
+     script: |
+      cd strapi-sao
+      git pull
+      npm -v
+      node -v
+      npm ci
+      npm run build
+      pm2 reload strapi-sao || pm2 start npm --name strapi-sao -- run start
+
