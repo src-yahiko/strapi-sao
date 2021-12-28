@@ -21,5 +21,5 @@ jobs:
       npm -v
       node -v
       npm i
-      pm2 reload strapi-sao || pm2 start npm --name strapi-sao -- run start
+      pm2 reload strapi-sao || pm2 start npm --name strapi-sao -- run develop
 
